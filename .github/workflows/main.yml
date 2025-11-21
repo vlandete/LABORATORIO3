@@ -1,4 +1,4 @@
-name: Simple Contexts Example
+name: Simple Contexts Examples
 on: push
 jobs:
   print-info:
