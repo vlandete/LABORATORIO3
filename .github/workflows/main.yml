@@ -1,11 +1,20 @@
-name: Less Than or Equal Operator Example
+name: build
 on: push
 jobs:
-  check_number:
+  job1:
     runs-on: ubuntu-latest
+    outputs: 
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - name: Check if number is less than or equal to limit
-        run: |
-          result=$((7<= 19 ? "true" : "false"))
-          echo "Is 7 less than or equal to 19? Result: ${{ 7<= 19}}"
-          echo "Is 7 less than or equal to 19? Result (using shell): $result"
+      - id: set-matrix
+        run: echo
+         "matrix={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> $GITHUB_OUTPUT
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+    strategy: 
+      matrix: ${{ fromJSON(needs.job1.outputs.matrix) }}
+    steps:
+      - run: build
+    
+            
