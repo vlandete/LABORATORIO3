@@ -2,7 +2,7 @@ name: Simple Contexts Example
 on: push
 jobs:
   print-info:
-    runs-on: ubuntu lates t
+    runs-on: ubuntu latest
     steps:
       - name: Set custom environment variable
         run: echo "CUSTOM_VARIABLE=Hello, World!" >> $GITHUB_ENV
