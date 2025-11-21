@@ -1,13 +1,11 @@
-name: Simple Contexts Example
+name: Less Than or Equal Operator Example
 on: push
 jobs:
-  print-info:
-    runs-on: ubuntu latest
+  check_number:
+    runs-on: ubuntu-latest
     steps:
-      - name: Set custom environment variable
-        run: echo "CUSTOM_VARIABLE=Hello, World!" >> $GITHUB_ENV
-
-      - name: Print commit author and custom environment variable
+      - name: Check if number is less than or equal to limit
         run: |
-          echo "Commit author: ${{ github.actor }}"
-          echo "Custom variable: ${{ env.CUSTOM_VARIABLE }}"
+          result=$((7<= 19 ? "true" : "false"))
+          echo "Is 7 less than or equal to 19? Result: ${{ 7<= 19}}"
+          echo "Is 7 less than or equal to 19? Result (using shell): $result"
